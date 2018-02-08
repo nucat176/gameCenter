@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180208023748) do
+ActiveRecord::Schema.define(version: 20180208050732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,13 +18,22 @@ ActiveRecord::Schema.define(version: 20180208023748) do
   create_table "games", force: :cascade do |t|
     t.string "title"
     t.string "platform"
-    t.float "ign_score"
-    t.string "review_link"
     t.string "genre"
-    t.string "ign_review_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["title"], name: "index_games_on_title", unique: true
+    t.integer "ign_review_id"
+    t.index ["title"], name: "index_games_on_title"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "source"
+    t.string "date"
+    t.float "score"
+    t.string "author"
+    t.string "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["link"], name: "index_reviews_on_link", unique: true
   end
 
 end
